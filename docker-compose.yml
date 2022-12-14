@@ -3,7 +3,6 @@ services:
     platform: linux/amd64
     build:
       context: ./src
-      dockerfile: ./src/Dockerfile
     image: upsi
     container_name: upsi
     restart: unless-stopped
@@ -23,5 +22,5 @@ services:
       MAINZELLISTE_BASE_URL: ${MAINZELLISTE_BASE_URL}
       MAINZELLISTE_API_KEY: ${MAINZELLISTE_API_KEY}
       MAINZELLISTE_API_VERSION: 3.2
-   volumes: 
+    volumes:
       - "ssl:/https:ro"
