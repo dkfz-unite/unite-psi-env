@@ -1,0 +1,20 @@
+services:
+  upsi:
+    platform: linux/amd64
+    build:
+      context: ./src
+      dockerfile: ./src/Dockerfile
+    image: upsi
+    container_name: upsi
+    restart: unless-stopped
+    environment:
+      JWT_KEY: ${JWT_KEY}
+      LDAP_SERVER: ${LDAP_SERVER}
+      LDAP_PORT: ${LDAP_PORT}
+      LDAP_SERVICE_USER_RNA: ${LDAP_SERVICE_USER_RNA}
+      LDAP_SERVICE_USER_PASSWORD: ${LDAP_SERVICE_USER_PASSWORD}
+      LDAP_USER_TARGET_OU: ${LDAP_USER_TARGET_OU}
+      LDAP_AUTHORIZED_USER_IDS: ${LDAP_AUTHORIZED_USER_IDS}
+      MAINZELLISTE_BASE_URL: ${MAINZELLISTE_BASE_URL}
+      MAINZELLISTE_API_KEY: ${MAINZELLISTE_API_KEY}
+      MAINZELLISTE_API_VERSION: 3.2
