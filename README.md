@@ -14,7 +14,7 @@ UNITE PSI installation scripts and configuration files
 ### Folder Structure
 - _docker-compose.yml_ - installation configuration
 - _install.sh_ - installation script
-- uninstall.sh_ - uninstallation script
+- _uninstall.sh_ - uninstallation script
 - _secrets_template.json_ - JSON configuration template file with all required credentials
 
 ### Secrets
