@@ -23,4 +23,4 @@ services:
       MAINZELLISTE_API_KEY: ${MAINZELLISTE_API_KEY}
       MAINZELLISTE_API_VERSION: 3.2
     volumes:
-      - "ssl:/https:ro"
+      - "./ssl:/https:ro"
