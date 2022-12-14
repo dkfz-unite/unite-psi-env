@@ -17,6 +17,7 @@ UNITE PSI installation scripts and configuration files
 - _uninstall.sh_ - uninstallation script
 - _secrets_template.json_ - JSON configuration template file with all required credentials
 - _config_template.json_ - JSON configuration template file with all required parameters
+- _generate-ssl.sh_ - script to generate development SSL certificate
 
 ### Config
 There is just one information in this file: The base url of the mainzelliste
