@@ -24,3 +24,6 @@ services:
       MAINZELLISTE_API_VERSION: 3.2
     volumes:
       - "./ssl:/https:ro"
+    ports:
+      # - "80:80"
+      - "443:443"
