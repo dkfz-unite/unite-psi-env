@@ -8,10 +8,10 @@ services:
     restart: unless-stopped
     environment:
       ASPNETCORE_ENVIRONMENT: Release
-      ASPNETCORE_HTTPS_PORT: 443
-      ASPNETCORE_URLS: https://+:443;http://+:80
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/upsi-cert.pem
-      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /https/upsi-key.pem
+#       ASPNETCORE_HTTPS_PORT: 443
+#       ASPNETCORE_URLS: https://+:443;http://+:80
+#       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/upsi-cert.pem
+#       ASPNETCORE_Kestrel__Certificates__Default__KeyPath: /https/upsi-key.pem
       JWT_KEY: ${JWT_KEY}
       LDAP_SERVER: ${LDAP_SERVER}
       LDAP_PORT: ${LDAP_PORT}
@@ -22,8 +22,5 @@ services:
       MAINZELLISTE_BASE_URL: ${MAINZELLISTE_BASE_URL}
       MAINZELLISTE_API_KEY: ${MAINZELLISTE_API_KEY}
       MAINZELLISTE_API_VERSION: 3.2
-    volumes:
-      - "./ssl:/https:ro"
-    ports:
-      # - "80:80"
-      - "443:443"
+#     volumes:
+#       - "./ssl:/https:ro"
