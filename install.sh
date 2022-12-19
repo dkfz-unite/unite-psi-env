@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ghb_tkn=""
 ghb_usr=""
+ghb_tkn=""
 
 tput setaf 6; echo "# Installing UNITE Pseudonymization Service Interface"; tput sgr0
 
