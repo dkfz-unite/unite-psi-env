@@ -14,5 +14,4 @@ docker pull ghcr.io/dkfz-unite/upsi:latest
 echo ""
 
 tput setaf 4; echo "# Running the image"; tput sgr0
-# docker-compose -p '' -f docker-compose.yml up -d --build
 docker stack deploy --compose-file docker-compose.yml unite
