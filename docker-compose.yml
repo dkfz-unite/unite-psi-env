@@ -25,15 +25,3 @@ services:
     # ports: 
     #   - "80:80"
     #   - "443:443"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.upsi.rule=Host(`dkfzpsndev.inet.dkfz-heidelberg.de`)"
-      #- "traefik.http.middlewares.upsi-strip.stripprefix.prefixes=/upsi"
-      #- "traefik.http.routers.upsi.middlewares=upsi-strip"
-    networks:
-      - traefik
-      - default
-
-networks:
-  traefik:
-    external: true
