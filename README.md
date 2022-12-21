@@ -62,6 +62,7 @@ To generate passwords (eg. jwt key) one of command line tools can be used:
 1. Generate SSL certificate
    - For **localhost**: `sh generate-ssl.sh`
    - For **network**: `sh generate-ssl.sh <IP address or domain name>`
+1. Run `docker network create unite` if the network **unite** does not already exist
 1. Install application
    - `sh install.sh`
 
