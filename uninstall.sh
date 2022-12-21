@@ -1,7 +1,7 @@
 #!/bin/bash
 
 tput setaf 6; echo "# Removing upsi containers"; tput sgr0
-docker service rm unite_upsi
+docker rm -f upsi
 echo ""
 
 tput setaf 6; echo "# Removing upsi images"; tput sgr0
