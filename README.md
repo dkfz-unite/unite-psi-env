@@ -1,6 +1,5 @@
 ## UNITE Pseudonymization Service Interface
-
-UNITE PSI installation scripts and configuration files
+UNITE PSI installation scripts and configuration files.
 
 ### Prerequisites
 - Software
@@ -10,61 +9,55 @@ UNITE PSI installation scripts and configuration files
   - mkcert (https://github.com/FiloSottile/mkcert)
   
 ### Folder Structure
-- _docker-compose.yml_ - installation configuration
-- _install.sh_ - installation script
-- _uninstall.sh_ - uninstallation script
-- _generate-ssl.sh_ - script to generate development SSL certificate
+- _docker-compose.yml_ - deployment configuration.
+- _docker-compose.build.yml_ - build configuration.
+- _deploy.sh_ - deployment script.
+- _build.sh_ - build script.
+- _uninstall.sh_ - uninstallation script.
+- _generate-ssl.sh_ - script to generate development SSL certificate.
+- _configure.sh_ - host environment configuration script.
 
 ### Secrets
-Secrets reuired to connect to github docker registry are located in **install.sh** file:
-```bash
-#!/bin/bash
-
-ghb_usr=""
-ghb_tkn=""
-```
+Secrets reuired to connect to github docker registry are located in **add-registry.sh** file:
 - _ghb_usr_ - Github user name, used to connect to github docker registry.
 - _ghb_tkn_ - Github user development (with all repository permissions), used to authorize github user.
 
-
-Secrets required to configure the application are stored in **docker-compose.yml** file:
-```yml
-JWT_KEY: "Defautl32BitApiKeyHasToBeChanged"
-LDAP_SERVER: ""
-LDAP_PORT: "thisCanBeEmpty"
-LDAP_SERVICE_USER_RNA: ""
-LDAP_SERVICE_USER_PASSWORD: ""
-LDAP_USER_TARGET_OU: ""
-LDAP_AUTHORIZED_USER_IDS: "dummyA,dummyB"
-MAINZELLISTE_BASE_URL: ""
-MAINZELLISTE_API_KEY: ""
-```
+Secrets required to configure the application are stored in **.env** file:
 - _JWT_KEY_ - 32 bit **API** key, used for authorization purposes.
 - _LDAP_SERVER_ - **LDAP Server Url** used to connect to Active Directory LDAP server for AD-User authentication.
 - _LDAP_PORT_ - **LDAP Port** used to connect to Active Directory LDAP server. If it is not needed it can be left blank ("").
-- _LDAP_SERVICE_USER_RNA_ - **LDAP Service User RNA** relative distinguished name of the service user that has access to the LDAP server in order to authenticate other user credentials
-- _LDAP_SERVICE_USER_PASSWORD_ - **LDAP Service User Password** of the service user that has access to the LDAP server in order to authenticate other user credentials
-- _LDAP_USER_TARGET_OU_ - **LDAP User Target OU** LDAP organizational unit of the users to be authenticated
-- _LDAP_AUTHORIZED_USER_IDS_ - List of comma delimited **LDAP User Ids** of the users that should have access to the pseudonymization service (example: "a123b,c456d,...")
-- _MAINZELLISTE_BASE_URL_ - **Mainzelliste Url** used to do requests to Mainzelliste. (Mainzelliste instance to be used with this interface)
-- _MAINZELLISTE_API_KEY_ - **Mainzelliste Api Key** used to do requests to Mainzelliste.
+- _LDAP_SERVICE_USER_RNA_ - **LDAP Service User RNA** relative distinguished name of the service user that has access to the LDAP server in order to authenticate other user credentials.
+- _LDAP_SERVICE_USER_PASSWORD_ - **LDAP Service User Password** of the service user that has access to the LDAP server in order to authenticate other user credentials.
+- _LDAP_USER_TARGET_OU_ - **LDAP User Target OU** LDAP organizational unit of the users to be authenticated.
+- _UPSI_API_KEY_ - 32 bit **API** key, used for authorization purposes.
+- _UPSI_ADMIN_USER_ - Admin user. This option used only for dev purposes and doesnt work on production environment.
+- _UPSI_ADMIN_PASSWORD_ - Admin password. This option used only for dev purposes and doesnt work on production environment.
+- _UPSI_AUTHORIZED_USERS_ - Comma separated list of authorized users or "*" if all users are authorized to access.
+- _ML_API_KEY_ - 32 bit **API** key, used by **Mainzelliste** for security purposes.
+- _ML_DB_NAME_ - **Mainzelliste** database name.
+- _ML_DB_USER_ - **Mainzelliste** database password.
+- _ML_DB_PASS_ - **Mainzelliste** database password.
 
-To generate passwords (eg. jwt key) one of command line tools can be used:
-- `openssl rand -base64 22` - to generate 32 bit Base64 string
+To generate passwords (eg. API key) one of command line tools can be used:
+- `openssl rand -base64 22` - to generate 32 bit Base64 string.
 
 **!IMPORTANT: ALWAYS CHANGE ALL CREDENTIALS!**
 
 **!IMPORTANT: NEVER COMMIT THESE FILES OR CREDENTIALS TO THE REPOSITORY!**
 
 ### Installation
-1. Download **unite-psi-environment** source files from git repository
-1. **Change credentials** in install.sh and docker-compose.yml
+1. Download **unite-psi-env** source files from git repository.
+1. **Change credentials** in **.env** and **add-registry.sh** files.
 1. Generate SSL certificate
    - For **localhost**: `sh generate-ssl.sh`
    - For **network**: `sh generate-ssl.sh <IP address or domain name>`
-1. Run `docker network create unite` if the network **unite** does not already exist
-1. Install application
-   - `sh install.sh`
+1. Run **configure.sh** script to configure the application.
+   - `sh configure.sh`
+1. Deploy application
+   - `sh deploy.sh`
+
+### Mainzelliste configuration
+For **Mainzelliste** configuration chage **mainzelliste.docker.conf** file according to official [documentation](https://bitbucket.org/medicalinformatics/mainzelliste/wiki/2.%20Mainzelliste%20Documentation.md#!mainzelliste-documentation).
 
 ### Uninstallation
 To uninstall the application run:

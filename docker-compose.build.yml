@@ -1,11 +1,14 @@
 services:
   front.ps.net:
-    image: ghcr.io/dkfz-unite/upsi:latest
+    build: 
+      context: ./src
+      dockerfile: ./Dockerfile
+    image: upsi.latest
     pull_policy: always
     container_name: ps.front
     restart: unless-stopped
     environment:
-      ASPNETCORE_ENVIRONMENT: Release
+      ASPNETCORE_ENVIRONMENT: Development
       API_KEY: ${UPSI_APIKEY}
       ADMIN_USER: ${UPSI_ADMIN_USER}
       ADMIN_PASSWORD: ${UPSI_ADMIN_PASSWORD}
