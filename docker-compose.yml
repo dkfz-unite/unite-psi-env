@@ -1,6 +1,6 @@
 services:
   front.ps.net:
-    image: ghcr.io/dkfz-unite/upsi:latest
+    image: ghcr.io/dkfz-unite/unite-psi:latest
     pull_policy: always
     container_name: ps.front
     restart: unless-stopped

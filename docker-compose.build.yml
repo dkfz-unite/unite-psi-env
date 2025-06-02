@@ -3,7 +3,7 @@ services:
     build: 
       context: ./src
       dockerfile: ./Dockerfile
-    image: upsi.latest
+    image: unite-psi
     pull_policy: always
     container_name: ps.front
     restart: unless-stopped
