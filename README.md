@@ -47,7 +47,8 @@ To generate passwords (eg. API key) one of command line tools can be used:
 
 ### Installation
 1. Download **unite-psi-env** source files from git repository.
-1. **Change credentials** in **.env** and **add-registry.sh** files.
+1. **Change credentials** in **env** file and rename it to **.env**.
+1. **Change credentials** **add-registry.sh** file.
 1. Generate SSL certificate
    - For **localhost**: `sh generate-ssl.sh`
    - For **network**: `sh generate-ssl.sh <IP address or domain name>`
