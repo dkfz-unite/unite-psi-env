@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      API_KEY: ${UPSI_APIKEY}
+      API_KEY: ${UPSI_API_KEY}
       ADMIN_USER: ${UPSI_ADMIN_USER}
       ADMIN_PASSWORD: ${UPSI_ADMIN_PASSWORD}
       AUTHORIZED_USERS: ${UPSI_AUTHORIZED_USERS}
