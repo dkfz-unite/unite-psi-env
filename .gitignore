@@ -1,5 +1,4 @@
 # gitignore
-config.json
-secrets.json
+.env
+.config.json
 *.DS_Store
-.src

@@ -6,7 +6,8 @@ UNITE PSI installation scripts and configuration files.
   - Docker
   - Docker compose
 - Command line tools
-  - mkcert (https://github.com/FiloSottile/mkcert)
+  - [mkcert](https://github.com/FiloSottile/mkcert)
+  - [jq](https://stedolan.github.io/jq)
   
 ### Folder Structure
 - _docker-compose.yml_ - deployment configuration.
@@ -18,12 +19,12 @@ UNITE PSI installation scripts and configuration files.
 - _configure.sh_ - host environment configuration script.
 
 ### Secrets
-Secrets reuired to connect to github docker registry are located in **add-registry.sh** file:
-- _ghb_usr_ - Github user name, used to connect to github docker registry.
-- _ghb_tkn_ - Github user development (with all repository permissions), used to authorize github user.
+Secrets reuired to configure image build process are located in **config.json** file:
+- _github.user_ - Github user name, used to connect to github docker registry.
+- _github.token_ - Github user development (with all repository permissions), used to authorize github user.
+- _source.path_ - Path to the source code directory, used to build the docker image.
 
 Secrets required to configure the application are stored in **.env** file:
-- _JWT_KEY_ - 32 bit **API** key, used for authorization purposes.
 - _LDAP_SERVER_ - **LDAP Server Url** used to connect to Active Directory LDAP server for AD-User authentication.
 - _LDAP_PORT_ - **LDAP Port** used to connect to Active Directory LDAP server. If it is not needed it can be left blank ("").
 - _LDAP_SERVICE_USER_RNA_ - **LDAP Service User RNA** relative distinguished name of the service user that has access to the LDAP server in order to authenticate other user credentials.
@@ -47,8 +48,8 @@ To generate passwords (eg. API key) one of command line tools can be used:
 
 ### Installation
 1. Download **unite-psi-env** source files from git repository.
-1. **Change credentials** in **env** file and rename it to **.env**.
-1. **Change credentials** **add-registry.sh** file.
+1. **Change** credentials in **env_template** file and rename it to **.env**.
+1. **Change** credentials in **config_template.json** file and rename it to **config.json**.
 1. Generate SSL certificate
    - For **localhost**: `sh generate-ssl.sh`
    - For **network**: `sh generate-ssl.sh <IP address or domain name>`
