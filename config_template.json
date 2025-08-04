@@ -1,0 +1,9 @@
+{
+    "github": {
+        "user": null,
+        "token": null
+    },
+    "source": {
+        "path": "/path/to/source/code/directory"
+    }
+}

@@ -2,7 +2,7 @@ services:
   front.ps.net:
     image: ghcr.io/dkfz-unite/unite-psi:latest
     platform: linux/amd64
-    # pull_policy: always
+    pull_policy: always
     container_name: ps.front
     restart: unless-stopped
     environment:
@@ -52,22 +52,6 @@ services:
       - ps.back:/usr/local/tomcat/logs/
     ports:
       - "42101:8080"
-    depends_on:
-      - data.ps.net
-
-  data.ps.net:
-    image: postgres:15-alpine
-    platform: linux/amd64
-    container_name: ps.data
-    restart: unless-stopped
-    environment:
-      - POSTGRES_DB=${ML_DB_NAME}
-      - POSTGRES_USER=${ML_DB_USER}
-      - POSTGRES_PASSWORD=${ML_DB_PASS}
-    volumes:
-      - ps.data:/var/lib/postgresql/data:rw
-    ports:
-      - "5432:5432"
 
 secrets:
   mainzelliste.docker.conf:
@@ -76,9 +60,6 @@ secrets:
 volumes:
   ps.back:
     name: ps.back
-    driver: local
-  ps.data:
-    name: ps.data
     driver: local
 
 networks: 

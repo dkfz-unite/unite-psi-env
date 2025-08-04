@@ -1,5 +1,8 @@
 # gitignore
-
+.env
 config.json
-secrets.json
+images/
+sql/
+dump.sql
+src
 *.DS_Store

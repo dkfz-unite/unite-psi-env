@@ -1,12 +1,14 @@
 services:
   front.ps.net:
-    image: ghcr.io/dkfz-unite/unite-psi:latest
-    platform: linux/amd64
-    # pull_policy: always
+    build: 
+      context: ./src
+      dockerfile: ./Dockerfile
+    image: unite-psi
+    pull_policy: always
     container_name: ps.front
     restart: unless-stopped
     environment:
-      ASPNETCORE_ENVIRONMENT: Release
+      ASPNETCORE_ENVIRONMENT: Development
       API_KEY: ${UPSI_API_KEY}
       ADMIN_USER: ${UPSI_ADMIN_USER}
       ADMIN_PASSWORD: ${UPSI_ADMIN_PASSWORD}
@@ -18,7 +20,7 @@ services:
       LDAP_USER_TARGET_OU: ${LDAP_USER_TARGET_OU}
       ML_BASE_URL: "http://back.ps.net:8080"
       ML_API_KEY: ${ML_API_KEY}
-      ML_API_VERSION: 3.2
+      ML_API_VERSION: 3.1
       no_proxy: back.ps.net
     # volumes:
     #   - "./ssl:/https:ro"
@@ -31,7 +33,6 @@ services:
 
   back.ps.net:
     image: medicalinformatics/mainzelliste:1.10-latest
-    platform: linux/amd64
     container_name: ps.back
     restart: unless-stopped
     environment:
@@ -52,22 +53,6 @@ services:
       - ps.back:/usr/local/tomcat/logs/
     ports:
       - "42101:8080"
-    depends_on:
-      - data.ps.net
-
-  data.ps.net:
-    image: postgres:15-alpine
-    platform: linux/amd64
-    container_name: ps.data
-    restart: unless-stopped
-    environment:
-      - POSTGRES_DB=${ML_DB_NAME}
-      - POSTGRES_USER=${ML_DB_USER}
-      - POSTGRES_PASSWORD=${ML_DB_PASS}
-    volumes:
-      - ps.data:/var/lib/postgresql/data:rw
-    ports:
-      - "5432:5432"
 
 secrets:
   mainzelliste.docker.conf:
@@ -76,9 +61,6 @@ secrets:
 volumes:
   ps.back:
     name: ps.back
-    driver: local
-  ps.data:
-    name: ps.data
     driver: local
 
 networks: 
