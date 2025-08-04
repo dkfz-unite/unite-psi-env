@@ -1,12 +1,14 @@
 services:
   front.ps.net:
-    image: ghcr.io/dkfz-unite/unite-psi:latest
-    platform: linux/amd64
-    # pull_policy: always
+    build: 
+      context: ./src
+      dockerfile: ./Dockerfile
+    image: unite-psi
+    pull_policy: always
     container_name: ps.front
     restart: unless-stopped
     environment:
-      ASPNETCORE_ENVIRONMENT: Release
+      ASPNETCORE_ENVIRONMENT: Development
       API_KEY: ${UPSI_API_KEY}
       ADMIN_USER: ${UPSI_ADMIN_USER}
       ADMIN_PASSWORD: ${UPSI_ADMIN_PASSWORD}
@@ -18,7 +20,7 @@ services:
       LDAP_USER_TARGET_OU: ${LDAP_USER_TARGET_OU}
       ML_BASE_URL: "http://back.ps.net:8080"
       ML_API_KEY: ${ML_API_KEY}
-      ML_API_VERSION: 3.2
+      ML_API_VERSION: 3.1
       no_proxy: back.ps.net
     # volumes:
     #   - "./ssl:/https:ro"
@@ -31,7 +33,6 @@ services:
 
   back.ps.net:
     image: medicalinformatics/mainzelliste:1.10-latest
-    platform: linux/amd64
     container_name: ps.back
     restart: unless-stopped
     environment:
@@ -57,7 +58,6 @@ services:
 
   data.ps.net:
     image: postgres:15-alpine
-    platform: linux/amd64
     container_name: ps.data
     restart: unless-stopped
     environment:
@@ -74,11 +74,11 @@ secrets:
     file: ./mainzelliste.docker.conf
 
 volumes:
-  ps.back:
-    name: ps.back
-    driver: local
   ps.data:
     name: ps.data
+    driver: local
+  ps.back:
+    name: ps.back
     driver: local
 
 networks: 

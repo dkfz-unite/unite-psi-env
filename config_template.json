@@ -4,6 +4,6 @@
         "token": null
     },
     "source": {
-        "path": "path/to/source/code/directory"
+        "path": "/path/to/source/code/directory"
     }
 }

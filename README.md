@@ -14,7 +14,6 @@ UNITE PSI installation scripts and configuration files.
 - _docker-compose.build.yml_ - build configuration.
 - _deploy.sh_ - deployment script.
 - _build.sh_ - build script.
-- _uninstall.sh_ - uninstallation script.
 - _generate-ssl.sh_ - script to generate development SSL certificate.
 - _configure.sh_ - host environment configuration script.
 
@@ -22,7 +21,7 @@ UNITE PSI installation scripts and configuration files.
 Secrets reuired to configure image build process are located in **config.json** file:
 - _github.user_ - Github user name, used to connect to github docker registry.
 - _github.token_ - Github user development (with all repository permissions), used to authorize github user.
-- _source.path_ - Path to the source code directory, used to build the docker image.
+- _source.path_ - Path to the source code directory, used to build docker images.
 
 Secrets required to configure the application are stored in **.env** file:
 - _LDAP_SERVER_ - **LDAP Server Url** used to connect to Active Directory LDAP server for AD-User authentication.
@@ -60,7 +59,3 @@ To generate passwords (eg. API key) one of command line tools can be used:
 
 ### Mainzelliste configuration
 For **Mainzelliste** configuration chage **mainzelliste.docker.conf** file according to official [documentation](https://bitbucket.org/medicalinformatics/mainzelliste/wiki/2.%20Mainzelliste%20Documentation.md#!mainzelliste-documentation).
-
-### Uninstallation
-To uninstall the application run:
-- `sh uninstall.sh`

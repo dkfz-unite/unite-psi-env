@@ -33,7 +33,6 @@ services:
 
   back.ps.net:
     image: medicalinformatics/mainzelliste:1.10-latest
-    platform: linux/amd64
     container_name: ps.back
     restart: unless-stopped
     environment:
@@ -54,19 +53,6 @@ services:
       - ps.back:/usr/local/tomcat/logs/
     ports:
       - "42101:8080"
-    depends_on:
-      - data.ps.net
-
-  data.ps.net:
-    image: postgres:15-alpine
-    container_name: ps.data
-    restart: unless-stopped
-    environment:
-      - POSTGRES_DB=${ML_DB_NAME}
-      - POSTGRES_USER=${ML_DB_USER}
-      - POSTGRES_PASSWORD=${ML_DB_PASS}
-    volumes:
-      - ps.data:/var/lib/postgresql/data:rw
 
 secrets:
   mainzelliste.docker.conf:
@@ -75,9 +61,6 @@ secrets:
 volumes:
   ps.back:
     name: ps.back
-    driver: local
-  ps.data:
-    name: ps.data
     driver: local
 
 networks: 
