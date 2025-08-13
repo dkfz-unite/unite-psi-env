@@ -2,7 +2,7 @@ services:
   front.ps.net:
     image: ghcr.io/dkfz-unite/unite-psi:latest
     platform: linux/amd64
-    pull_policy: always
+    # pull_policy: always
     container_name: ps.front
     restart: unless-stopped
     environment:
